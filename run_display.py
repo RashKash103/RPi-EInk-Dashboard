@@ -100,4 +100,7 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         logger.info("Ctrl+C detected, terminating.")
         if epd:
+            epd.init()
+            epd.Clear()
+            epd.sleep()
             epd7in5_V2.epdconfig.module_exit()
