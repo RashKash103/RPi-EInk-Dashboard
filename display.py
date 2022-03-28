@@ -1,5 +1,6 @@
 import os
 import pytz
+import logging
 from datetime import datetime, timedelta, tzinfo
 from PIL import Image, ImageDraw, ImageOps
 from fonts import Style, get_font
@@ -9,6 +10,9 @@ from weather_icons import get_moon_phase_name, get_weather_icon_for_code, get_we
 from dotenv import load_dotenv
 from typing import Tuple
 from pytz import timezone
+
+logger = logging.getLogger(__name__)
+logger.level = logging.INFO
 
 class State:
     def __str__(self):
@@ -33,6 +37,7 @@ class EventState(State):
 load_dotenv()
 
 def draw_day(image: Image.Image, state: DisplayState):
+    logger.info("Attempting to draw day info.")
     date_str = datetime.now().strftime("%A, %b %-d")
 
     draw = ImageDraw.Draw(image)
@@ -41,6 +46,7 @@ def draw_day(image: Image.Image, state: DisplayState):
 
 
 def draw_weather(image: Image.Image, state: DisplayState):
+    logger.info("Attempting to draw weather info.")
     weather_data = get_json()
     draw = ImageDraw.Draw(image)
 
@@ -151,6 +157,7 @@ def draw_weather(image: Image.Image, state: DisplayState):
     state.beaufort_speed = beaufort_speed
     
 def draw_calendar(image: Image.Image, state: DisplayState):
+    logger.info("Attempting to draw calendar info.")
     global tz
     tz = timezone(os.getenv('TIMEZONE'))
 
