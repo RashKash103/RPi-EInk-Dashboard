@@ -84,7 +84,9 @@ def init_display() -> epd7in5_V2.EPD:
         epd = epd7in5_V2.EPD()
         epd.init()
         epd.Clear()
+        epd.sleep()
         logger.info("Successfully initialized EPD")
+        return epd
     except IOError as e:
         logger.error(e)
         return None
