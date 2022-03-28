@@ -37,8 +37,6 @@ def get_calendar() -> str:
         print("Error")
         exit(0)
     return Calendar.from_ical(req.text)
-    # with open('calendar.ics', mode='r') as calendar:
-    #     return Calendar.from_ical(calendar.read())
 
 def _extract_events(events: List[Event], date: datetime.date) -> List[SavedEvent]:
     days_events = []
